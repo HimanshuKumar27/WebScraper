@@ -33,45 +33,51 @@ exports.check = async function(ip) {
   
   const rateLimitRef = db.collection('_rateLimit').doc(ipKey);
 
-  const result = await db.runTransaction(async (transaction) => {
-    const doc = await transaction.get(rateLimitRef);
-    const now = Date.now();
-    let timestamps = [];
+  let result;
+  try {
+    result = await db.runTransaction(async (transaction) => {
+      const doc = await transaction.get(rateLimitRef);
+      const now = Date.now();
+      let timestamps = [];
 
-    if (doc.exists) {
-      timestamps = doc.data().timestamps || [];
-    }
+      if (doc.exists) {
+        timestamps = doc.data().timestamps || [];
+      }
 
-    // Filter out timestamps older than 10 minutes
-    const tenMinutesAgo = now - LIMIT_WINDOW_MS;
-    const activeTimestamps = timestamps.filter(t => t > tenMinutesAgo);
+      // Filter out timestamps older than 10 minutes
+      const tenMinutesAgo = now - LIMIT_WINDOW_MS;
+      const activeTimestamps = timestamps.filter(t => t > tenMinutesAgo);
 
-    if (activeTimestamps.length >= LIMIT_MAX_SCANS) {
+      if (activeTimestamps.length >= LIMIT_MAX_SCANS) {
+        return { 
+          allowed: false, 
+          used: activeTimestamps.length, 
+          limit: LIMIT_MAX_SCANS,
+          remaining: 0 
+        };
+      }
+
+      // Add current timestamp
+      activeTimestamps.push(now);
+
+      // Save with a 24-hour expiration for Firestore TTL cleanup
+      transaction.set(rateLimitRef, {
+        timestamps: activeTimestamps,
+        ip: safeIp,
+        expiresAt: new Date(now + 24 * 60 * 60 * 1000),
+      });
+
       return { 
-        allowed: false, 
+        allowed: true, 
         used: activeTimestamps.length, 
         limit: LIMIT_MAX_SCANS,
-        remaining: 0 
+        remaining: LIMIT_MAX_SCANS - activeTimestamps.length 
       };
-    }
-
-    // Add current timestamp
-    activeTimestamps.push(now);
-
-    // Save with a 24-hour expiration for Firestore TTL cleanup
-    transaction.set(rateLimitRef, {
-      timestamps: activeTimestamps,
-      ip: safeIp,
-      expiresAt: new Date(now + 24 * 60 * 60 * 1000),
     });
-
-    return { 
-      allowed: true, 
-      used: activeTimestamps.length, 
-      limit: LIMIT_MAX_SCANS,
-      remaining: LIMIT_MAX_SCANS - activeTimestamps.length 
-    };
-  });
+  } catch (err) {
+    console.warn('Rate limit Firestore transaction failed:', err.message, '— bypassing rate limit.');
+    result = { allowed: true, used: 0, limit: LIMIT_MAX_SCANS, remaining: LIMIT_MAX_SCANS };
+  }
 
   return result;
 };

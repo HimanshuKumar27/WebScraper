@@ -19,8 +19,11 @@ function getDb() {
       admin.initializeApp({
         credential: admin.credential.cert(serviceAccount),
       });
+    } else if (process.env.VERCEL) {
+      // Running on Vercel but missing the env var!
+      throw new Error('FIREBASE_SERVICE_ACCOUNT environment variable is not set.');
     } else {
-      // Firebase Cloud Functions environment
+      // Firebase Cloud Functions environment (auto-discovers credentials)
       admin.initializeApp();
     }
   }
