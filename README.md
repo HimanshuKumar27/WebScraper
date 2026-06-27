@@ -16,7 +16,7 @@ All of this works with **zero accounts or sign-ups required**.
 *   **SSRF & Loopback Block**: Implements backend active DNS resolution and blocks loopbacks, link-local IPs, or private IP spaces to shield servers from Server-Side Request Forgery.
 *   **Rate Limiting Protection**: Protects server resources using an IP-based sliding-window limiter (capped at **25 scans per 10 minutes**) backed by Firestore.
 *   **No Accounts Needed**: Fully stateless on the frontend, storing report results in `sessionStorage` with no database footprint on the client side.
-*   **Premium Visuals**: Features custom HSL-tailored dark modes, interactive 3D particle canvas overlays, score halos, animations, and PDF export.
+*   **Premium Visuals**: Features custom HSL-tailored dark modes, interactive 3D particle canvas overlays, score halos, and animations.
 
 
 
