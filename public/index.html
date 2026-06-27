@@ -160,11 +160,14 @@
         </div>
 
         <h2 class="text-3xl sm:text-4xl font-bold mb-3">Scanning <span id="scanning-url-display" class="text-gradient font-black truncate max-w-[300px] inline-block align-bottom"></span></h2>
-        <p class="text-gray-400 text-base mb-10" id="scanning-status-text">Fetching page metadata...</p>
+        <div class="flex items-center justify-between mb-3 text-base">
+          <p class="text-gray-400" id="scanning-status-text">Fetching page metadata...</p>
+          <span class="text-primary-400 font-bold" id="scanning-progress-percent">0%</span>
+        </div>
         
         <!-- Progress Bar -->
-        <div class="h-2 rounded-full bg-dark-800 overflow-hidden w-full mx-auto">
-          <div id="scanning-progress-bar" class="h-full bg-primary-500 rounded-full transition-all duration-300" style="width: 5%; box-shadow: 0 0 12px rgba(20,184,166,0.7)"></div>
+        <div class="h-2 rounded-full bg-dark-800 overflow-hidden w-full mx-auto mb-10">
+          <div id="scanning-progress-bar" class="h-full bg-primary-500 rounded-full transition-all duration-300" style="width: 0%; box-shadow: 0 0 12px rgba(20,184,166,0.7)"></div>
         </div>
       </div>
       
@@ -382,12 +385,12 @@
           </div>
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-2 mb-1">
-              <span class="text-sm font-semibold text-white truncate">example.com</span>
+              <span class="text-sm font-semibold text-white truncate">growstrom.com</span>
               <span class="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-semibold border border-emerald-500/20">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>200 OK
               </span>
             </div>
-            <p class="text-xs text-gray-500 truncate">The Example Company — Building great things since 2020</p>
+            <p class="text-xs text-gray-500 truncate">https://growstrom.com/</p>
           </div>
           <!-- Overall score -->
           <div class="flex-shrink-0 text-center">
@@ -540,6 +543,7 @@
     async function startScan(url) {
       const progressBar = document.getElementById('scanning-progress-bar');
       const statusText = document.getElementById('scanning-status-text');
+      const progressPercent = document.getElementById('scanning-progress-percent');
       
       let stepIndex = 0;
       let progressTimer;
@@ -549,6 +553,7 @@
         const step = STEPS[stepIndex];
         progressBar.style.width = step.pct + '%';
         statusText.textContent = step.label;
+        if (progressPercent) progressPercent.textContent = step.pct + '%';
         stepIndex++;
 
         if (stepIndex < STEPS.length) {
@@ -575,6 +580,7 @@
         clearTimeout(progressTimer);
         progressBar.style.width = '100%';
         statusText.textContent = 'Scan complete!';
+        if (progressPercent) progressPercent.textContent = '100%';
 
         sessionStorage.setItem('launchshield_scan', JSON.stringify(scanResult));
 
