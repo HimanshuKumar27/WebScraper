@@ -134,7 +134,7 @@
   </section>
 
   <!-- ── Full Page Scanning Section (Hidden by default) ── -->
-  <section id="scan-section" class="hidden relative min-h-screen flex flex-col items-center justify-center py-20 bg-dark-950 z-50">
+  <section id="scan-section" class="hidden relative min-h-screen flex-col items-center justify-center py-20 bg-dark-950 z-50">
     <div class="absolute inset-0 bg-mesh-gradient pointer-events-none opacity-50" aria-hidden="true"></div>
     <div class="relative z-10 w-full max-w-2xl px-4 text-center">
       
@@ -514,6 +514,7 @@
         // Show the full-page scanning section and smoothly scroll to it
         const scanSection = document.getElementById('scan-section');
         scanSection.classList.remove('hidden');
+        scanSection.classList.add('flex');
         document.getElementById('hero-error-ui').classList.add('hidden');
         document.getElementById('hero-scanning-ui').classList.remove('hidden');
         document.getElementById('scanning-url-display').textContent = parsed.hostname;
@@ -529,7 +530,9 @@
     
     document.getElementById('hero-retry-btn').addEventListener('click', () => {
       document.getElementById('hero-error-ui').classList.add('hidden');
-      document.getElementById('scan-section').classList.add('hidden');
+      const scanSection = document.getElementById('scan-section');
+      scanSection.classList.add('hidden');
+      scanSection.classList.remove('flex');
       // Scroll back up to hero form
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
