@@ -46,7 +46,7 @@ After the first deploy, go to **Project → Settings → Environment Variables**
 | `FIREBASE_SERVICE_ACCOUNT` | ✅ Yes | Full JSON of your Firebase service account (for rate limiting). Paste as a single-line string. |
 | `PAGESPEED_API_KEY` | Optional | Google PageSpeed Insights API key. Without it, deterministic mock scores are used. |
 | `GEMINI_API_KEY` | Optional | Gemini AI key for real AI recommendations. Without it, rule-based recommendations are used. |
-| `SCREENSHOT_API_KEY` | Optional | ScreenshotOne key (100 free/month). Without it, Microlink free fallback is used. |
+| `SCREENSHOT_API_KEY` | Optional | ScreenshotOne key (100 free/month). Without it, Thum.io free fallback is used. |
 
 > **How to set `FIREBASE_SERVICE_ACCOUNT`:** Copy the full content of your service account JSON file and paste it as the environment variable value. Vercel handles multi-line secrets correctly.
 
@@ -102,8 +102,7 @@ LaunchShield/
 │   ├── index.js             ← Firebase Functions entry point
 │   └── package.json         ← Functions dependencies
 ├── public/                  ← Static frontend (served as CDN root)
-│   ├── index.html           ← Landing page
-│   ├── scan.html            ← Scanning progress page
+│   ├── index.html           ← Landing page & Scanning progress UI
 │   ├── report.html          ← Audit report page
 │   ├── css/                 ← Compiled Tailwind CSS
 │   ├── js/                  ← Frontend JS modules
