@@ -1,6 +1,6 @@
-# LaunchShield 🛡️
+# WebScraper 🔍
 
-LaunchShield is a free, no-login website audit tool that scans any public URL and gives you a clear health report in under 30 seconds.
+WebScraper is a free, no-login website audit tool that scans any public URL and gives you a clear health report in under 30 seconds.
 
 It checks five things at once — Performance, SEO, Accessibility, Security, and Best Practices — and scores each one out of 100. Then it uses Gemini AI to turn those raw scores into plain-English action items, so you know exactly what to fix and in what order.
 
@@ -27,14 +27,14 @@ All of this works with **zero accounts or sign-ups required**.
 git init
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/YOUR_USERNAME/LaunchShield.git
+git remote add origin https://github.com/YOUR_USERNAME/WebScraper.git
 git push -u origin main
 ```
 
 ### 2. Import to Vercel
 1. Go to [vercel.com](https://vercel.com) and sign in.
 2. Click **"Add New Project"** → **"Import Git Repository"**.
-3. Select your `LaunchShield` repository.
+3. Select your `WebScraper` repository.
 4. Vercel will auto-detect the `vercel.json` config. **Do not change any settings.**
 5. Click **"Deploy"**.
 
@@ -93,7 +93,7 @@ This starts a local server at `http://localhost:3000` that serves `public/` as s
 ## 📁 Project Structure
 
 ```
-LaunchShield/
+WebScraper/
 ├── api/                     ← Vercel Serverless Functions
 │   ├── runScan.js           ← Vercel HTTP adapter for runScanUseCase
 │   └── package.json         ← API dependencies
