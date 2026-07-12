@@ -55,7 +55,7 @@ function formatDate(isoString) {
 
 function renderReport(scan) {
   // ── Site Preview ─────────────────────────────────────────────────────────
-  document.title = (scan.siteMeta?.title || scan.url) + ' — LaunchShield';
+  document.title = (scan.siteMeta?.title || scan.url) + ' — WebScraper';
 
   const { siteMeta = {}, scores = {}, performance = {}, accessibility = {}, seo = {}, security = {}, ux = {}, recommendations = [] } = scan;
 

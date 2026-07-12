@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
   <meta name="darkreader-lock" content="true" />
-  <title>Audit Report — LaunchShield</title>
+  <title>Audit Report — WebScraper</title>
   <meta name="description" content="Full website audit report including performance, SEO, accessibility, security, and best practices scores with AI-powered recommendations." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,11 +19,11 @@
   <!-- ── Navigation ──────────────────────────────── -->
   <nav class="sticky top-0 z-40 border-b border-white/[0.06]" style="background:rgba(3,7,18,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5 group" aria-label="Back to LaunchShield home">
+      <a href="index.html" class="flex items-center gap-2.5 group" aria-label="Back to WebScraper home">
         <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center glow-teal-sm transition-all duration-300 group-hover:scale-110">
           <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L3 7v6c0 5.25 3.75 10.15 9 11.25C17.25 23.15 21 18.25 21 13V7l-9-5z"/></svg>
         </div>
-        <span class="font-bold text-lg tracking-tight text-white hidden sm:block">Launch<span class="text-gradient">Shield</span></span>
+        <span class="font-bold text-lg tracking-tight text-white hidden sm:block">Web<span class="text-gradient">Scraper</span></span>
       </a>
       <div class="flex items-center gap-2" id="nav-actions">
         <button id="nav-scan-another" onclick="window.location.href='index.html'" class="btn-ghost text-sm">
@@ -240,7 +240,7 @@
     // ── Boot / Load scan ───────────────────────────
     function boot() {
       // Load only from sessionStorage (since accounts are removed and report saving is disabled)
-      let raw = sessionStorage.getItem('launchshield_scan');
+      let raw = sessionStorage.getItem('webscraper_scan');
       if (!raw) {
         const mockScan = {
           "url": "https://example.com",
@@ -303,7 +303,7 @@
             { "priority": "medium", "category": "performance", "text": "Eliminate render-blocking stylesheets to improve speed." }
           ]
         };
-        sessionStorage.setItem('launchshield_scan', JSON.stringify(mockScan));
+        sessionStorage.setItem('webscraper_scan', JSON.stringify(mockScan));
         raw = JSON.stringify(mockScan);
       }
       if (raw) {

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
   <meta name="darkreader-lock" content="true" />
-  <title>LaunchShield — Scan. Analyze. Improve. Launch with Confidence.</title>
-  <meta name="description" content="LaunchShield gives you a single AI-powered report that tells you exactly what's wrong with your website before you launch — and what to fix first." />
+  <title>WebScraper — Free & Instant Website Audit Tool</title>
+  <meta name="description" content="WebScraper is a free, no-login website audit tool that scans any public URL and gives you a clear health report in under 30 seconds." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -19,13 +19,13 @@
   <nav class="fixed top-0 left-0 right-0 z-40 border-b border-white/[0.06]" style="background:rgba(3,7,18,0.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
       <!-- Logo -->
-      <a href="index.html" class="flex items-center gap-2.5 group" aria-label="LaunchShield home">
+      <a href="index.html" class="flex items-center gap-2.5 group" aria-label="WebScraper home">
         <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center glow-teal-sm transition-all duration-300 group-hover:scale-110 group-hover:shadow-neon-teal">
           <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 2L3 7v6c0 5.25 3.75 10.15 9 11.25C17.25 23.15 21 18.25 21 13V7l-9-5z"/>
           </svg>
         </div>
-        <span class="font-bold text-lg tracking-tight text-white">Launch<span class="text-gradient">Shield</span></span>
+        <span class="font-bold text-lg tracking-tight text-white">Web<span class="text-gradient">Scraper</span></span>
       </a>
       <!-- Nav links -->
       <div class="hidden md:flex items-center gap-6">
@@ -81,10 +81,10 @@
 
       <!-- Headline -->
       <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-6 animate-fade-in">
-        Shield your site<br/>before you <span class="text-gradient">launch.</span>
+        Audit your site<br/>in <span class="text-gradient">seconds.</span>
       </h1>
       <p class="text-xl sm:text-2xl text-gray-400 font-light max-w-2xl mx-auto mb-12 leading-relaxed animate-fade-in">
-        Run an instant 5-point audit scanning Core Performance, SEO, Inclusive Design, Defensive Hardening, and Standards. Backed by Gemini AI.
+        A free, no-login website audit tool that scans any public URL and gives you a clear health report in under 30 seconds.
       </p>
 
       <!-- URL Input (glass upgrade) -->
@@ -308,9 +308,9 @@
 
     <div class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center reveal">
       <h2 class="text-4xl sm:text-5xl font-black tracking-tight mb-6">
-        Ready to launch<br/><span class="text-gradient">with confidence?</span>
+        Ready to audit<br/><span class="text-gradient">your website?</span>
       </h2>
-      <p class="text-gray-400 text-lg mb-10">Join developers, agencies, and founders who use LaunchShield before every launch.</p>
+      <p class="text-gray-400 text-lg mb-10">Join developers, agencies, and founders who use WebScraper for instant website audits.</p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a href="#hero-scan-form" class="btn-primary text-base px-8 py-4">
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
@@ -328,10 +328,10 @@
           <div class="w-7 h-7 bg-primary-600 rounded-lg flex items-center justify-center">
             <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L3 7v6c0 5.25 3.75 10.15 9 11.25C17.25 23.15 21 18.25 21 13V7l-9-5z"/></svg>
           </div>
-          <span class="font-bold text-base text-white">Launch<span class="text-gradient">Shield</span></span>
+          <span class="font-bold text-base text-white">Web<span class="text-gradient">Scraper</span></span>
         </div>
         <p class="text-gray-600 text-sm">Powered by Google Lighthouse &amp; Gemini AI</p>
-        <p class="text-gray-600 text-sm">&copy; 2026 LaunchShield. All rights reserved.</p>
+        <p class="text-gray-600 text-sm">&copy; 2026 WebScraper. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -442,7 +442,7 @@
         statusText.textContent = 'Scan complete!';
         if (progressPercent) progressPercent.textContent = '100%';
 
-        sessionStorage.setItem('launchshield_scan', JSON.stringify(scanResult));
+        sessionStorage.setItem('webscraper_scan', JSON.stringify(scanResult));
 
         setTimeout(() => {
           window.location.href = 'report.html';
