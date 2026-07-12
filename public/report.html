@@ -94,8 +94,24 @@
     </div>
 
     <!-- ── Sub-scores Row ─────────────────────────── -->
-    <div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-6" id="subscores-row">
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mb-6" id="subscores-row">
       <!-- Rendered by JS -->
+    </div>
+
+    <!-- ── Visual Metrics ─────────────────────────── -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6" id="visual-metrics-row">
+      <div class="card-glass-premium p-6 flex flex-col items-center">
+        <h3 class="text-sm font-bold text-gray-400 mb-4 self-start">Score Balance</h3>
+        <div class="w-full max-w-[260px] aspect-square flex items-center justify-center">
+          <canvas id="radar-chart"></canvas>
+        </div>
+      </div>
+      <div class="card-glass-premium p-6 flex flex-col">
+        <h3 class="text-sm font-bold text-gray-400 mb-4">Category Comparison</h3>
+        <div class="w-full h-64 flex items-center justify-center">
+          <canvas id="bar-chart"></canvas>
+        </div>
+      </div>
     </div>
 
     <!-- ── AI Recommendations ─────────────────────── -->
@@ -224,7 +240,72 @@
     // ── Boot / Load scan ───────────────────────────
     function boot() {
       // Load only from sessionStorage (since accounts are removed and report saving is disabled)
-      const raw = sessionStorage.getItem('launchshield_scan');
+      let raw = sessionStorage.getItem('launchshield_scan');
+      if (!raw) {
+        const mockScan = {
+          "url": "https://example.com",
+          "createdAt": new Date().toISOString(),
+          "siteMeta": {
+            "title": "Example Domain",
+            "description": "This domain is for use in illustrative examples in documents.",
+            "faviconUrl": "https://example.com/favicon.ico",
+            "screenshotUrl": "",
+            "statusCode": 200
+          },
+          "scores": {
+            "performance": 95,
+            "accessibility": 88,
+            "seo": 100,
+            "security": 80,
+            "ux": 90,
+            "overall": 91
+          },
+          "performance": {
+            "fcp": "0.8s",
+            "lcp": "1.2s",
+            "speedIndex": "1.0s",
+            "tbt": "50ms",
+            "cls": "0.01",
+            "audits": [
+              { "title": "Reduce unused CSS", "score": 0.5, "severity": "medium", "description": "Unused CSS slows down loading.", "displayValue": "0.5s potential savings" },
+              { "title": "First Contentful Paint", "score": 1, "severity": "low", "description": "Fast first paint.", "displayValue": "0.8s" }
+            ]
+          },
+          "accessibility": {
+            "audits": [
+              { "title": "Image elements do not have [alt] attributes", "score": 0, "severity": "high", "description": "Add alt text.", "displayValue": "1 element" }
+            ]
+          },
+          "seo": {
+            "titleTag": true,
+            "metaDescription": true,
+            "canonicalTag": true,
+            "openGraphTags": false,
+            "robotsTxt": false,
+            "sitemapXml": false,
+            "structuredData": false,
+            "audits": []
+          },
+          "security": {
+            "httpsEnabled": true,
+            "sslValid": true,
+            "mixedContentWarnings": 0,
+            "headers": {
+              "csp": { "present": false },
+              "hsts": { "present": true, "value": "max-age=31536000" }
+            }
+          },
+          "ux": {
+            "audits": []
+          },
+          "recommendations": [
+            { "priority": "high", "category": "accessibility", "text": "Add alt attributes to images to support screen readers." },
+            { "priority": "medium", "category": "performance", "text": "Eliminate render-blocking stylesheets to improve speed." }
+          ]
+        };
+        sessionStorage.setItem('launchshield_scan', JSON.stringify(mockScan));
+        raw = JSON.stringify(mockScan);
+      }
       if (raw) {
         try {
           currentScan = JSON.parse(raw);

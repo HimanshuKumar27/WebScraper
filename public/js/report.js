@@ -259,6 +259,14 @@ function renderReport(scan) {
   // ── Best Practices tab ───────────────────────────────────────────────────
   document.getElementById('ux-audits').innerHTML =
     (ux.audits || []).map(buildAuditItem).join('');
+
+  // ── Initialize Charts ────────────────────────────────────────────────────
+  if (typeof window.initRadarChart === 'function') {
+    window.initRadarChart('radar-chart', scores);
+  }
+  if (typeof window.initBarChart === 'function') {
+    window.initBarChart('bar-chart', scores);
+  }
 }
 
 // ── Tab switching ──────────────────────────────────────────────────────────
